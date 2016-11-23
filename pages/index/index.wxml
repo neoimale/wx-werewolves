@@ -1,10 +1,10 @@
-<!--index.wxml-->
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <view class="btn-create flex-item">
+    <image class="btn-image" src="../../resources/create.png"></image>
+    <text class="btn-text">创建房间</text>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="btn-join flex-item">
+    <image class="btn-image" src="../../resources/join.png"></image>
+    <text class="btn-text">加入游戏</text>
   </view>
 </view>

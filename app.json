@@ -1,12 +1,13 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/index2/index2"
+    "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#353535",
+    "navigationBarBackgroundColor": "#efeff4",
     "navigationBarTitleText": "狼人杀",
-    "navigationBarTextStyle":"white"
-  }
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#efeff4"
+  },
+  "debug": true
 }
