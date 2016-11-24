@@ -5,6 +5,9 @@ Page({
   },
   searchRoom: function(event) {
     console.log(event);
+    wx.redirectTo({
+      url: '../room-killer/room-killer?number=123&role=wolf'
+    })
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数

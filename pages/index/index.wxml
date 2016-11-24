@@ -1,4 +1,5 @@
-<view class="container">
+<view class="page-container">
+  <view class="main-container">
   <button class="btn-create flex-item" bindtap="tapCreate">
     <image class="btn-image" src="../../resources/create.png"></image>
     <text class="btn-text">创建房间</text>
@@ -7,4 +8,5 @@
     <image class="btn-image" src="../../resources/join.png"></image>
     <text class="btn-text">加入游戏</text>
   </button>
+  </view>
 </view>

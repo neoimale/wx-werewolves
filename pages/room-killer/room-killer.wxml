@@ -1,2 +1,20 @@
 <!--pages/room-killer/room-killer.wxml-->
-<text>pages/room-killer/room-killer.wxml</text>
+<view class="page-container">
+  <view class="flex-item role-panel">
+    <text class="text-desc">你的身份</text>
+    <text class="player-role">{{role}}</text>
+    <text class="text-desc text-center">{{roleDesc}}</text>
+  </view>
+  <view class="config-panel">
+    <block wx:for="{{roomInfo}}">
+      <view class="config-item">
+        <text class="config-item-key">{{item.key}}</text>
+        <text class="config-item-value">{{item.value}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="action-panel btn-area">
+    <button type="primary">需要我的帮助?</button>
+    <button type="default">游戏规则</button>
+  </view>
+</view>

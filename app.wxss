@@ -2,17 +2,13 @@
 page {
   background-color: #efeff4
 }
-.container {
+.page-container {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  box-sizing: border-box;
+  flex: 1;
+  background-color: #efeff4;
 }
 
-.container input {
+.page-container input {
   background-color: #fff;
   padding-left: 20rpx;
 } 
@@ -21,4 +17,21 @@ page {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.text-desc {
+  color: #888;
+  font-size: 13pt;
+}
+
+.text-center {
+  text-align: center;  
+}
+
+.btn-area{
+    padding: 0 30px;
+}
+.btn-area button{
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
 }
