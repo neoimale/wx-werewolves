@@ -1,0 +1,2 @@
+/* pages/join-room/join-room.wxss */
+@import "../../widget/search.wxss";

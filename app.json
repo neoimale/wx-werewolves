@@ -1,6 +1,8 @@
 {
   "pages":[
-    "pages/index/index"
+    "pages/index/index",
+    "pages/join-room/join-room",
+    "pages/room-killer/room-killer"
   ],
   "window":{
     "backgroundTextStyle":"light",

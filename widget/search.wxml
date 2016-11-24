@@ -1,0 +1,6 @@
+<template name="search">
+  <form class="widget-search" bindsubmit="{{doSearch}}">
+    <input class="widget-search-input" name="keyword" type="text" placeholder="{{placeholder}}" auto-focus/>
+    <button class="widget-search-submit" type="primary" form-type="submit">搜索</button>
+  </form>
+</template>

@@ -1,0 +1,5 @@
+<!--pages/join-room/join-room.wxml-->
+<import src="../../widget/search.wxml"/>
+<view class="container">
+<template is="search" data="{{placeholder: '输入房间号', doSearch: 'searchRoom'}}" />
+</view>

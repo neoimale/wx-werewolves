@@ -10,6 +10,11 @@ page {
   justify-content: space-between;
   padding: 10px;
   box-sizing: border-box;
+}
+
+.container input {
+  background-color: #fff;
+  padding-left: 20rpx;
 } 
 
 .flex-item {

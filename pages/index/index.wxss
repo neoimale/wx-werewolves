@@ -5,15 +5,21 @@
 .btn-create, .btn-join {
     width: 100%;
     margin: 15rpx 10rpx;
-    height: 560rpx;
-    background: #fff;
+    height: 550rpx;
     flex-direction: column;
+    border-radius: 0;
+    /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);*/
+}
+
+.btn-create::after, .btn-join::after {
+    border: 1px solid #e9e9ef;
+    border-radius: 0;
 }
 
 .btn-image {
-  width: 120rpx;
-  height: 120rpx;
-  margin: 40rpx;
+  width: 136rpx;
+  height: 136rpx;
+  margin: 36rpx;
   border-radius: 50%;
 }
 
