@@ -2,13 +2,14 @@
   "pages":[
     "pages/index/index",
     "pages/join-room/join-room",
-    "pages/room-killer/room-killer"
+    "pages/room-killer/room-killer",
+    "pages/create-room/create-room"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#efeff4",
+    "navigationBarBackgroundColor": "#11111",
     "navigationBarTitleText": "狼人杀",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle":"white",
     "backgroundColor": "#efeff4"
   },
   "debug": true

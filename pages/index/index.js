@@ -4,7 +4,18 @@ Page({
 
     },
     tapCreate: (event) => {
-        console.log('tap create');
+        wx.navigateTo({
+          url: '../create-room/create-room',
+          success: function(res){
+            // success
+          },
+          fail: function() {
+            // fail
+          },
+          complete: function() {
+            // complete
+          }
+        })
     },
     tapJoin: (event) => {
         console.log('tap join');

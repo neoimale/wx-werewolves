@@ -1,0 +1,27 @@
+<view class="page-container">
+<form bindsubmit="clickCreateGameAction">
+    <view class="section-text-input">
+        <text class="text-select">请选择游戏总人数</text>
+        <view class="textInput">
+            <text class="textInput-leftView">人数</text>
+            <input class="textInput-main" placeholder="输入游戏总人数" type="number" auto-focus/>
+        </view>
+    </view>
+
+    <view class="section-text-input">
+        <text class="text-select">请选择角色配置</text>
+        <view class="textInput">
+            <text class="textInput-leftView">狼人</text>
+            <input class="textInput-main" placeholder="输入狼人人数" type="number" auto-focus/>
+        </view>
+
+        <view class="line"></view>
+
+        <view class="textInput">
+            <text class="textInput-leftView">村民</text>
+            <input class="textInput-main" placeholder="输入村民人数" type="number" auto-focus/>
+        </view>
+    </view>
+
+</form>
+</view>
