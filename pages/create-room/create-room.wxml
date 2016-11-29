@@ -31,12 +31,12 @@
 
     <view class="line"></view>
 
-    <view class="section-radio">
-        <radio-group class="radio-group" bindchange="radioChange">
-            <label class="radio" wx:for="{{items}}">
-                <radio value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+    <view class="section-checkbox">
+        <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox" wx:for="{{items}}">
+                <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
             </label>
-        </radio-group>
+        </checkbox-group>
     </view>
 
     <view class="btn-area">

@@ -32,18 +32,11 @@
     margin-left: 15px;
 }
 
-.section-radio {
+.section-checkbox {
     background-color: white;
     height: 60px;
 }
 
-/*.radio-group {
-}*/
-
-.radio {
-    flex: 10;
-    background-color: #ff6331;
-}
 
 .btn-area {
     margin-top: 30px;
