@@ -7,9 +7,9 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#11111",
+    "navigationBarBackgroundColor": "#efeff4",
     "navigationBarTitleText": "狼人杀",
-    "navigationBarTextStyle":"white",
+    "navigationBarTextStyle":"black",
     "backgroundColor": "#efeff4"
   },
   "debug": true

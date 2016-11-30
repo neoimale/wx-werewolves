@@ -23,6 +23,9 @@ Page({
     var roomNum = options.number;
     var role = options.role;
     var timestamp = options.timestamp;
+    wx.setNavigationBarTitle({
+      title: '狼人杀 - ' + roomNum
+    })
   },
   onReady:function(){
     // 页面渲染完成

@@ -3,6 +3,16 @@ Page({
     data: {
 
     },
+    onLoad: (options) => {
+        // wx.connectSocket({
+        //   url: "wss://api.byutech.cn/ws/sessionid"
+        // })
+        // wx.onSocketOpen(function() {
+        //   wx.sendSocketMessage({
+        //     data: 'I got U'
+        //   })
+        // })
+    },
     tapCreate: (event) => {
         wx.navigateTo({
           url: '../create-room/create-room',
