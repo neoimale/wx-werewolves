@@ -1,26 +1,46 @@
 <view class="page-container">
 <form bindsubmit="clickCreateGameAction">
-    <view class="section-text-input">
+    <view class="section-text-picker">
         <text class="text-select">请选择游戏总人数</text>
-        <view class="textInput">
-            <text class="textInput-leftView">人数</text>
-            <input class="textInput-main" placeholder="输入游戏总人数" type="number" auto-focus/>
-        </view>
+        <picker bindchange="bindPickerChangeToTotal" value="{{totalIndex}}" range="{{totalList}}">
+            <view class="picker">
+                <text class="picker-leftView">总人数:</text>
+                <text class="picker-main">{{totalList[totalIndex]}}</text>
+            </view>
+        </picker>
     </view>
 
-    <view class="section-text-input">
+    <view class="section-text-picker">
         <text class="text-select">请选择角色配置</text>
-        <view class="textInput">
-            <text class="textInput-leftView">狼人</text>
-            <input class="textInput-main" placeholder="输入狼人人数" type="number" auto-focus/>
-        </view>
+        <picker bindchange="bindPickerChangeToWerwolf" value="{{werwolfIndex}}" range="{{werwolfList}}">
+            <view class="picker">
+                <text class="picker-leftView">狼人:</text>
+                <text class="picker-main">{{werwolfList[werwolfIndex]}}</text>
+            </view>
+        </picker>
 
         <view class="line"></view>
 
-        <view class="textInput">
-            <text class="textInput-leftView">村民</text>
-            <input class="textInput-main" placeholder="输入村民人数" type="number" auto-focus/>
-        </view>
+        <picker bindchange="bindPickerChangeToVillager" value="{{villagerIndex}}" range="{{villagerList}}">
+            <view class="picker">
+                <text class="picker-leftView">村民:</text>
+                <text class="picker-main">{{villagerList[villagerIndex]}}</text>
+            </view>
+        </picker>
+    </view>
+
+    <view class="line"></view>
+
+    <view class="section-checkbox">
+        <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox" wx:for="{{items}}">
+                <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+            </label>
+        </checkbox-group>
+    </view>
+
+    <view class="btn-area">
+        <button formType="submit" type="primary">创建游戏</button>
     </view>
 
 </form>
