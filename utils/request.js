@@ -11,6 +11,7 @@ function login() {
               method: 'POST',
               success: function(sres){
                 var sessionId = sres.data.sessionid;
+                console.log('sessionid:', sessionId);
                 wx.setStorage({
                   key: 'session_id',
                   data: sessionId
@@ -33,13 +34,13 @@ function request(options, withSeesion = true) {
         wx.getStorage({
             key: 'session_id',
             success: function(res) {
-                if (options.data) {
-                  options.data.sessionid = res.data;
-                }
+                options.data = options.data || {};
+                options.data.sessionid = res.data;
+                
                 wx.request({
                   url: Const.HTTPS_URL + options.url,
                   data: options.data,
-                  method: options.method,
+                  method: options.method || 'GET',
                   header: options.header || {}, 
                   success: function(res){
                     if(res.data.code == 0) {

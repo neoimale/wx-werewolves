@@ -1,3 +1,5 @@
+var request = require('../../utils/request').request;
+
 Page({
   data: {
     totalList: ['6', '7', '8', '9','10','11','12','13'],
@@ -42,5 +44,26 @@ Page({
 
   clickCreateGameAction: function(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    request({
+          url: '/room/create',
+          data: {
+              type: 0,
+              num: 8,
+              config: { //房间配置
+                "wolf": 3, //狼人数
+                "oracle": 1, //预言家
+                "witch": 1, //女巫
+                "civilian": 3, //平民
+                "hunter": 0,//猎人
+                "cupid": 0, //丘比特
+                "guard": 0, //守卫
+                "idiot": 0  //白痴
+              }
+          },
+          method: 'POST',
+          success: function(data) {
+              console.log(data);
+          }
+    })
   },
 })
