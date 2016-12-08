@@ -1,4 +1,5 @@
 // pages/god-view/god-view.js
+var request = require('../../utils/request').request;
 Page({
   data:{
     roomNum: 8888,
@@ -31,6 +32,7 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
+    var roomNum = options.room;
     wx.getStorage({
       key: 'session_id',
       success: function(res){
@@ -38,8 +40,8 @@ Page({
           url: "wss://api.byutech.cn/ws/" + res.data
         })
         wx.onSocketOpen(() => this.socketOpen = true);
-        wx.onSocketMessage((data) => {
-          console.log('socket msg>>>', data);
+        wx.onSocketMessage((res) => {
+          console.log('socket msg>>>', res.data);
         })
       }
     })

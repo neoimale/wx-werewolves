@@ -44,6 +44,7 @@ Page({
 
   clickCreateGameAction: function(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    var page = this;
     request({
           url: '/room/create',
           data: {
@@ -61,12 +62,27 @@ Page({
               }
           },
           method: 'POST',
-          success: function(data) {
-              console.log(data);
-              wx.redirectTo({
-                url: '../god-view/god-view'
-              })
+          success: function(rlt) {
+              console.log('/room/create/ >>> ', rlt);
+              var roomNum = rlt.data.id;
+              page.go2GodView(roomNum);
           }
     })
   },
+
+  go2GodView: function(roomNum) {
+      request({
+          url: '/room/join/' + roomNum,
+          data: {god: 1},
+          method: 'POST',
+          success: function(rlt) {
+              console.log('/room/join/ >>> ', rlt);
+              if(rlt.data.god) {
+                wx.redirectTo({
+                    url: '../god-view/god-view'
+                })
+              }
+          }
+      })
+  }
 })
