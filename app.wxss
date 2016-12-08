@@ -19,6 +19,16 @@ page {
   justify-content: center;
 }
 
+.text-title {
+  color: #000;
+  font-size: 20pt;
+}
+
+.text-main {
+  color: #353535;
+  font-size: 14pt;
+}
+
 .text-desc {
   color: #888;
   font-size: 13pt;

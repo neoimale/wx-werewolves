@@ -63,6 +63,9 @@ Page({
           method: 'POST',
           success: function(data) {
               console.log(data);
+              wx.redirectTo({
+                url: '../god-view/god-view'
+              })
           }
     })
   },

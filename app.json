@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/join-room/join-room",
     "pages/room-killer/room-killer",
-    "pages/create-room/create-room"
+    "pages/create-room/create-room",
+    "pages/god-view/god-view"
   ],
   "window":{
     "backgroundTextStyle":"light",

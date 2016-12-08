@@ -1,0 +1,7 @@
+<template name="user-profile">
+  <view class="widget-user-profile {{extraClasses}}">
+    <image class="widget-profile-avatar" src="{{avatarUrl}}"></image>
+    <text class="widget-profile-name">{{name}}</text>
+    <text class="widget-profile-desc">{{desc}}</text>
+  </view>
+</template>
