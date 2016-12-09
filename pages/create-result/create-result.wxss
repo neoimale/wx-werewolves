@@ -1,0 +1,41 @@
+/* pages/create-result/create-result.wxss */
+.section {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.text-room-title {
+    color: #cccccc;
+    font-size: 11pt; 
+}
+
+.text-room-value {
+    color: #09BB07;
+    font-size: 35pt;
+}
+
+.text-success-title {
+    margin-top: 5px;
+    color: #353535;
+}
+
+.text-friendly-reminder {
+    margin-left: 15px;
+    text-align: center;
+    font-size: 10pt;
+    color: #999999;
+}
+
+.btn-area {
+    margin-top: 25px;
+}
+
+.btn-Gods {
+    opacity: 1.0;
+}
+
+.label-Gods {
+    /*display: flex;*/
+    justify-content: center;
+}

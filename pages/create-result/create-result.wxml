@@ -1,0 +1,30 @@
+<!--pages/create-result/create-result.wxml-->
+<view class="page-container">
+    <view class="section">
+        <text class="text-room-title">房间号</text>
+    </view>
+
+    <view class="section">
+        <text class="text-room-value">{{roomNumber}}</text>
+    </view>
+
+    <view class="section">
+        <text class="text-success-title">创建成功</text>
+    </view>
+
+    <view class="section">
+        <text class="text-friendly-reminder">现在可以输入房间号来加入游戏,准备好开始游戏吧~天黑请闭眼,neo是个大色棍</text>
+    </view>
+
+    <view class="btn-area">
+        <button class="btn-share" type="primary" bindtap="clickShareAction">分享给小伙伴</button>
+    </view>
+
+    <view class="btn-area">
+        <button class="btn-Gods" type="primary" bindtap="clickGodViewAction">我是上帝?</button>
+        <!--<label class="label-Gods">
+            <button class="btn-Gods">我是上帝?</button>
+            我是上帝?
+        </label>-->
+    </view>
+</view>

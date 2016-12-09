@@ -4,6 +4,7 @@
     "pages/join-room/join-room",
     "pages/room-killer/room-killer",
     "pages/create-room/create-room",
+    "pages/create-result/create-result",
     "pages/god-view/god-view"
   ],
   "window":{
