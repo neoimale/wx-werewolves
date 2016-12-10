@@ -6,38 +6,29 @@ Page({
     placeholder: '请输入房间号'
   },
   searchRoom: function(event) {
+    var roomNum = event.detail.value.keyword;
+    wx.showToast({
+      title: '正在加入房间',
+      icon: 'loading',
+      duration: 10000
+    })
     request({
-      url: '/room/join/' + event.detail.value.keyword,
+      url: '/room/join/' + roomNum,
       method: 'POST',
-      success: function(data) {
-        console.log(data);
+      success: function(res) {
+        wx.hideToast();
+        var cacheKey = 'join-room-'+ roomNum
+        getApp().setCache(cacheKey, res.data);
         wx.redirectTo({
-          url: '../room-killer/room-killer?number=' + data.num + '&role=' + data.role
+          url: '../room-killer/room-killer?cache=' + cacheKey + '&number=' + roomNum
         })
       },
       error: function(data) {
-        console.log(data);
+        wx.hideToast();
       }
     })
   },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
-    // wx.getStorage({
-    //   key: 'session_id',
-    //   success: function(res){
-    //     wx.connectSocket({
-    //       url: "wss://api.byutech.cn/ws/" + res.data
-    //     })
-    //     wx.onSocketOpen(function() {
-    //       wx.sendSocketMessage({
-    //         data: 'I got U'
-    //       })
-    //     })
-    //     wx.onSocketMessage(function(data) {
-    //       console.log('socket msg>>>', data);
-    //     })
-    //   }
-    // })
     
   },
   onReady:function(){

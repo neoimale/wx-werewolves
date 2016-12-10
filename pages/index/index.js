@@ -28,7 +28,6 @@ Page({
         })
     },
     tapJoin: (event) => {
-        console.log('tap join');
         wx.navigateTo({
           url: '../join-room/join-room'
         })

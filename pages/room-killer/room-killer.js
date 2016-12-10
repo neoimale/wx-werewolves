@@ -19,13 +19,17 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(options);
+    // console.log(options);
     var roomNum = options.number;
-    var role = options.role;
-    var timestamp = options.timestamp;
+    var cacheKey = options.cache;
+    var data = getApp().getCache(cacheKey);
+    console.log(data);
     wx.setNavigationBarTitle({
       title: '狼人杀 - ' + roomNum
     })
+  },
+  processInfo: function(data) {
+
   },
   onReady:function(){
     // 页面渲染完成
