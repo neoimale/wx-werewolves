@@ -1,4 +1,5 @@
 var request = require('../../utils/request').request;
+var Const = require('../../utils/const');
 
 Page({
   data: {
@@ -48,7 +49,7 @@ Page({
     request({
           url: '/room/create',
           data: {
-              type: 0,
+              type: Const.GAME.GAME_WOLF,
               num: 8,
               config: { //房间配置
                 "wolf": 3, //狼人数

@@ -10,5 +10,17 @@ module.exports = {
     GAME: {
         GAME_WOLF: GAME_WOLF,
         GAME_KILLER: GAME_KILLER
+    },
+    ROLE: {
+        WOLF: 'wolf',
+        ORACLE: 'oracle',
+        WITCH: 'witch',
+        CIVILIAN: 'civilian',
+        HUNTER: 'hunter',
+        CUPID: 'cupid',
+        GUARD: 'guard',
+        IDIOT: 'idiot',
+        POLICE: 'police',
+        KILLER: 'killer'
     }
 }

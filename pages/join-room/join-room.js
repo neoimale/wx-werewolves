@@ -2,11 +2,23 @@
 var request = require('../../utils/request').request;
 
 Page({
-  data:{
-    placeholder: '请输入房间号'
+  data: {
+    editMode: 1
   },
   searchRoom: function(event) {
     var roomNum = event.detail.value.keyword;
+    if(!roomNum) {
+      wx.showModal({
+        title: '请输入房间号',
+        content: '房间号不能为空, 快去问问小伙伴房间号吧',
+        showCancel: false
+      });
+      return;
+    }
+    var test = /(\d+)(god)$/.exec(roomNum);
+    var isGod = test ? test[2] : false;
+    roomNum = test ? test[1] : roomNum;
+    
     wx.showToast({
       title: '正在加入房间',
       icon: 'loading',
@@ -15,17 +27,39 @@ Page({
     request({
       url: '/room/join/' + roomNum,
       method: 'POST',
+      data: isGod ? {god: 1} : {},
       success: function(res) {
         wx.hideToast();
-        var cacheKey = 'join-room-'+ roomNum
-        getApp().setCache(cacheKey, res.data);
-        wx.redirectTo({
-          url: '../room-killer/room-killer?cache=' + cacheKey + '&number=' + roomNum
-        })
+        if(res.data.god) {
+          wx.redirectTo({
+            url: '../god-view/god-view?room=' + roomNum,
+          })
+        } else {
+          var cacheKey = 'join-room-'+ roomNum
+          getApp().setCache(cacheKey, res.data);
+          wx.redirectTo({
+            url: '../room-killer/room-killer?cache=' + cacheKey + '&number=' + roomNum
+          })
+        }
       },
       error: function(data) {
         wx.hideToast();
+        wx.showModal({
+          title: '加入游戏失败',
+          content: data.message,
+          showCancel: false
+        });
       }
+    })
+  },
+  enterEdit: function() {
+    this.setData({
+      editMode: 1
+    })
+  },
+  endEdit: function() {
+    this.setData({
+      editMode: 0
     })
   },
   onLoad:function(options){

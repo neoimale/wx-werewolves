@@ -23,9 +23,8 @@ Page({
           data: {god: 1},
           method: 'POST',
           success: function(rlt) {
-              console.log('/room/join/ >>> ', rlt);
               if(rlt.data.god) {
-                wx.navigateTo({
+                wx.redirectTo({
                     url: '../god-view/god-view?room='+roomNum,
                 })
               }

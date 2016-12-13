@@ -1,21 +1,26 @@
 // pages/room-killer/room-killer.js
+var Util = require('../../utils/util');
+var Const = require('../../utils/const');
+var _ = require('../../utils/lodash.core');
+
 Page({
   data:{
-    role: '女巫',
-    roleDesc: '你有一瓶解药和毒药，用好它们是游戏胜利的关键',
-    roomInfo: [{
-      key: '当前房号',
-      value: '8888'
-    }, {
-      key: '你是',
-      value: '2号'
-    }, {
-      key: '游戏人数',
-      value: '8'
-    }, {
-      key: '游戏配置',
-      value: '3狼人, 3村民, 1预言家, 1女巫, 0猎人, 0丘比特, 0白痴'
-    }]
+    // role: '女巫',
+    // roleDesc: '你有一瓶解药和毒药，用好它们是游戏胜利的关键',
+    // roleColor: '#e64340',
+    // roomInfo: [{
+    //   key: '当前房号',
+    //   value: '8888'
+    // }, {
+    //   key: '你是',
+    //   value: '2号'
+    // }, {
+    //   key: '游戏人数',
+    //   value: '8'
+    // }, {
+    //   key: '游戏配置',
+    //   value: '3狼人, 3村民, 1预言家, 1女巫, 0猎人, 0丘比特, 0白痴'
+    // }]
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -24,21 +29,46 @@ Page({
     var cacheKey = options.cache;
     var data = getApp().getCache(cacheKey);
     console.log(data);
+    var roleColor = this.roleColor(data.role);
+    data = this.processInfo(data);
+    data.roomInfo.unshift({key: '当前房号:', value: roomNum});
+    data.roleColor = roleColor;
+    this.setData(data);
     wx.setNavigationBarTitle({
       title: '狼人杀 - ' + roomNum
     })
   },
   processInfo: function(data) {
+    var out = {};
+    var gameType = data.roomInfo.type;
+    out.role = Util.translateRole(gameType, data.role);
+    out.roleDesc = data.desc;
+    out.roomInfo = [];
+    var config = JSON.parse(data.roomInfo.config);
+    out.roomInfo.push({key: '你是:', value: data.num + '号'});
+    out.roomInfo.push({key: '游戏人数:', value: data.roomInfo.num});
+    var configString = [];
+    _.each(config, (value, key) => {
+      if(value > 0) {
+        configString.push('' + value + Util.translateRole(gameType, key));
+      }
+    })
+    out.roomInfo.push({
+      key: '游戏配置:',
+      value: configString.join(', ')
+    })
+    return out;
+  },
+  roleColor: function(role) {
+    var good = [Const.ROLE.ORACLE, Const.ROLE.WITCH, Const.ROLE.HUNTER, Const.ROLE.CUPID, Const.ROLE.GUARD, Const.ROLE.POLICE];
+    var bad = [Const.ROLE.WOLF, Const.ROLE.KILLER];
 
-  },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    // 页面显示
-  },
-  onHide:function(){
-    // 页面隐藏
+    if(good.indexOf(role) != -1) {
+      return '#e64340';
+    } else if(bad.indexOf(role) != -1) {
+      return '#000';
+    }
+    return '#4a90e2';
   },
   onUnload:function(){
     // 页面关闭

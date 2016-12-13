@@ -2,7 +2,7 @@
 <view class="page-container">
   <view class="flex-item role-panel">
     <text class="text-desc">你的身份</text>
-    <text class="player-role">{{role}}</text>
+    <text class="player-role" style="color:{{roleColor}};">{{role}}</text>
     <text class="text-desc text-center">{{roleDesc}}</text>
   </view>
   <view class="config-panel">
