@@ -12,7 +12,10 @@ Page({
   onMessage: function(msg) {
     console.log('socket msg>>>', msg);
     try {
-      msg = JSON.parse(msg);
+      if(typeof msg === 'string') {
+        msg = JSON.parse(msg);
+      }
+      
       switch(msg.content.event) {
         case 'connected': {
           let players = msg.content.message.players;
@@ -42,7 +45,10 @@ Page({
   processPlayerInfo: function(player) {
     let info = JSON.parse(player.info);
     let roleName = Util.translateRole(this.data.roomType, player.role);
+    let color = Util.roleColor(player.role);
     return {
+      num: player.num,
+      color: color,
       nickName: info.nickName,
       avatarUrl: info.avatarUrl,
       role: player.role,
@@ -68,6 +74,25 @@ Page({
         wx.onSocketMessage((msg) => {
           this.onMessage(msg.data);
         })
+      }
+    })
+  },
+  restartGame: function() {
+    wx.showModal({
+      title: '重新开始',
+      content: '确定要重新开始游戏吗?',
+      success: (res) => {
+        if(res.confirm) {
+          request({
+            url: '/room/restart/' + this.data.roomNum,
+            method: 'POST',
+            success: (rlt) => {
+              this.setData({
+                players: []
+              })
+            } 
+          })
+        }
       }
     })
   },

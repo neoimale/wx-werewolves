@@ -4,13 +4,13 @@
   <view class="players-panel">
     <text class="text-main">房间号{{roomNum}}，已有{{players.length}}人加入游戏：</text>
     <view class="players-container">
-      <block wx:for="{{players}}">
-        <template is="user-profile" data="{{avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, extraClasses: index%3==1?'profile-center':''}}"/>
+      <block wx:for="{{players}}" wx:key="num">
+        <template is="user-profile" data="{{avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, textColor: item.color || '', extraClasses: index%3==1?'profile-center':''}}"/>
       </block>
     </view>
   </view>
   <view class="btn-area">
-    <button type="primary">重开一局</button>
+    <button type="primary" bindtap="restartGame">重开一局</button>
     <button type="default">上帝口令</button>
   </view>
 </view>

@@ -29,7 +29,7 @@ Page({
     var cacheKey = options.cache;
     var data = getApp().getCache(cacheKey);
     console.log(data);
-    var roleColor = this.roleColor(data.role);
+    var roleColor = Util.roleColor(data.role);
     data = this.processInfo(data);
     data.roomInfo.unshift({key: '当前房号:', value: roomNum});
     data.roleColor = roleColor;
@@ -58,17 +58,6 @@ Page({
       value: configString.join(', ')
     })
     return out;
-  },
-  roleColor: function(role) {
-    var good = [Const.ROLE.ORACLE, Const.ROLE.WITCH, Const.ROLE.HUNTER, Const.ROLE.CUPID, Const.ROLE.GUARD, Const.ROLE.POLICE];
-    var bad = [Const.ROLE.WOLF, Const.ROLE.KILLER];
-
-    if(good.indexOf(role) != -1) {
-      return '#e64340';
-    } else if(bad.indexOf(role) != -1) {
-      return '#000';
-    }
-    return '#4a90e2';
   },
   onUnload:function(){
     // 页面关闭

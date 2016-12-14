@@ -50,7 +50,20 @@ function translateRole(t, role) {
   }
 }
 
+function roleColor(role) {
+    var good = [Const.ROLE.ORACLE, Const.ROLE.WITCH, Const.ROLE.HUNTER, Const.ROLE.CUPID, Const.ROLE.GUARD, Const.ROLE.POLICE];
+    var bad = [Const.ROLE.WOLF, Const.ROLE.KILLER];
+
+    if(good.indexOf(role) != -1) {
+      return '#e64340';
+    } else if(bad.indexOf(role) != -1) {
+      return '#000';
+    }
+    return '#4a90e2';
+  }
+
 module.exports = {
   formatTime: formatTime,
-  translateRole: translateRole
+  translateRole: translateRole,
+  roleColor: roleColor
 }
