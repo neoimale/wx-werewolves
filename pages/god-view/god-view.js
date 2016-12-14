@@ -1,51 +1,72 @@
 // pages/god-view/god-view.js
 var request = require('../../utils/request').request;
+var _ = require('../../utils/lodash.core');
+var Util = require('../../utils/util');
+
 Page({
   data:{
     roomNum: 8888,
-    players: [{
-      avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqSeUf9vO3vicicnaPeFfibcM4H6CiaNiakfSSRMAZoFFvgiaFicUVcV3ibpTok9aeA9y6hfe0iaC3Sia9RwlbQ/0",
-      nickName: "neo",
-      roleName: "女巫",
-      role: "witch"
-    }, {
-      avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqSeUf9vO3vicicnaPeFfibcM4H6CiaNiakfSSRMAZoFFvgiaFicUVcV3ibpTok9aeA9y6hfe0iaC3Sia9RwlbQ/0",
-      nickName: "neo",
-      roleName: "女巫",
-      role: "witch"
-    }, {
-      avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqSeUf9vO3vicicnaPeFfibcM4H6CiaNiakfSSRMAZoFFvgiaFicUVcV3ibpTok9aeA9y6hfe0iaC3Sia9RwlbQ/0",
-      nickName: "neo",
-      roleName: "女巫",
-      role: "witch"
-    }, {
-      avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqSeUf9vO3vicicnaPeFfibcM4H6CiaNiakfSSRMAZoFFvgiaFicUVcV3ibpTok9aeA9y6hfe0iaC3Sia9RwlbQ/0",
-      nickName: "neo",
-      roleName: "女巫",
-      role: "witch"
-    }, {
-      avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqSeUf9vO3vicicnaPeFfibcM4H6CiaNiakfSSRMAZoFFvgiaFicUVcV3ibpTok9aeA9y6hfe0iaC3Sia9RwlbQ/0",
-      nickName: "neo",
-      roleName: "女巫",
-      role: "witch"
-    }]
+    roomType: 100,
+    players: []
+  },
+  onMessage: function(msg) {
+    console.log('socket msg>>>', msg);
+    try {
+      msg = JSON.parse(msg);
+      switch(msg.content.event) {
+        case 'connected': {
+          let players = msg.content.message.players;
+          players = _.map(players, (player) => {
+            return this.processPlayerInfo(player);
+          })
+          this.setData({
+            players: players
+          })
+          break;
+        }
+        case 'join': {
+          let player = msg.content.message;
+          player = this.processPlayerInfo(player);
+          let players = this.data.players || [];
+          players.push(player);
+          this.setData({
+            players: players
+          })
+          break;
+        }
+      }
+    } catch(e) {
+      console.error(e);
+    }
+  },
+  processPlayerInfo: function(player) {
+    let info = JSON.parse(player.info);
+    let roleName = Util.translateRole(this.data.roomType, player.role);
+    return {
+      nickName: info.nickName,
+      avatarUrl: info.avatarUrl,
+      role: player.role,
+      roleName: roleName
+    }
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
     var roomNumber = options.room;
+    var roomType = options.type;
     this.setData({
-      roomNum: roomNumber,      
+      roomNum: roomNumber, 
+      roomType: roomType     
     })
 
     wx.getStorage({
       key: 'session_id',
-      success: function(res){
+      success: (res) => {
         wx.connectSocket({
-          url: "wss://api.byutech.cn/ws/" + res.data
+          url: "wss://api.byutech.cn/ws/" + res.data + "?room=" + roomNumber +"&business=god"
         })
         wx.onSocketOpen(() => this.socketOpen = true);
-        wx.onSocketMessage((res) => {
-          console.log('socket msg>>>', res.data);
+        wx.onSocketMessage((msg) => {
+          this.onMessage(msg.data);
         })
       }
     })

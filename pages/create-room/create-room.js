@@ -70,7 +70,7 @@ Page({
     })
   },
   goResultView: function(roomNumber) {
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../create-result/create-result?room='+roomNumber,
       })
   }

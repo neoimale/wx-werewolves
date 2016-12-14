@@ -32,7 +32,7 @@ Page({
         wx.hideToast();
         if(res.data.god) {
           wx.redirectTo({
-            url: '../god-view/god-view?room=' + roomNum,
+            url: '../god-view/god-view?room=' + roomNum + '&type=' + res.data.roomInfo.type
           })
         } else {
           var cacheKey = 'join-room-'+ roomNum
