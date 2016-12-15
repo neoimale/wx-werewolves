@@ -44,7 +44,7 @@ Page({
     out.role = Util.translateRole(gameType, data.role);
     out.roleDesc = data.desc;
     out.roomInfo = [];
-    var config = JSON.parse(data.roomInfo.config);
+    var config = data.roomInfo.config;
     out.roomInfo.push({key: '你是:', value: data.num + '号'});
     out.roomInfo.push({key: '游戏人数:', value: data.roomInfo.num});
     var configString = [];

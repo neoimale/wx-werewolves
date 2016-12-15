@@ -2,19 +2,19 @@
 
 .role-panel {
     flex-direction: column;
-    padding: 40rpx;
+    padding: 30rpx;
 }
 .player-role {
     font-size: 26pt;
-    margin-top: 60rpx;
-    margin-bottom: 40rpx;
+    margin-top: 30rpx;
+    margin-bottom: 30rpx;
 }
 
 .config-panel {
     display: flex;
     flex-direction: column;
     padding: 0 30rpx;
-    margin: 50rpx auto;
+    margin: 40rpx auto;
 }
 
 .config-item {

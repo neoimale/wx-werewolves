@@ -5,7 +5,7 @@
     <text class="text-main">房间号{{roomNum}}，已有{{players.length}}人加入游戏：</text>
     <view class="players-container">
       <block wx:for="{{players}}" wx:key="num">
-        <template is="user-profile" data="{{avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, textColor: item.color || '', extraClasses: index%3==1?'profile-center':''}}"/>
+        <template is="user-profile" data="{{id: item.id, avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, textColor: item.color || '', extraClasses: index%3==1?'profile-center':''}}"/>
       </block>
     </view>
   </view>

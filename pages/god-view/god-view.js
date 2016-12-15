@@ -77,6 +77,12 @@ Page({
       }
     })
   },
+  onTapPlayer: function(e) {
+    console.log(e);
+    wx.showActionSheet({
+      itemList: ['选为警长', '死亡']
+    })
+  },
   restartGame: function() {
     wx.showModal({
       title: '重新开始',
