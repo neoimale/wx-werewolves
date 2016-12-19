@@ -5,7 +5,9 @@
     "pages/room-killer/room-killer",
     "pages/create-room/create-room",
     "pages/create-result/create-result",
-    "pages/god-view/god-view"
+    "pages/god-view/god-view",
+    "pages/wolf-rule/wolf-rule",
+    "pages/killer-rule/killer-rule"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -41,6 +41,7 @@ Page({
   processInfo: function(data) {
     var out = {};
     var gameType = data.roomInfo.type;
+    out.gameType = gameType;
     out.role = Util.translateRole(gameType, data.role);
     out.roleDesc = data.desc;
     out.roomInfo = [];
@@ -58,6 +59,19 @@ Page({
       value: configString.join(', ')
     })
     return out;
+  },
+  go2RulePage: function() {
+    var gameType = this.data.gameType;
+    if(gameType == Const.GAME.GAME_WOLF) {
+      wx.navigateTo({
+        url: '../wolf-rule/wolf-rule'
+      })
+    } else if(gameType == Const.GAME.GAME_KILLER) {
+      wx.navigateTo({
+        url: '../killer-rule/killer-rule'
+      })
+    }
+    
   },
   onUnload:function(){
     // 页面关闭

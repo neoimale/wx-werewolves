@@ -13,8 +13,7 @@
 .config-panel {
     display: flex;
     flex-direction: column;
-    padding: 0 30rpx;
-    margin: 40rpx auto;
+    padding: 40rpx 30rpx;
 }
 
 .config-item {
@@ -35,4 +34,8 @@
     font-size: 14pt;
     color: #353535;
     margin-left: 10rpx;
+}
+
+.action-panel {
+    margin-top: 50rpx;
 }
