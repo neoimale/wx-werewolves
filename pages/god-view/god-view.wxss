@@ -14,6 +14,22 @@
 }
 
 .profile-center {
-    margin-left: 75rpx;
-    margin-right: 75rpx;
+    margin-left: 45rpx;
+    margin-right: 45rpx;
+}
+
+.btn-area {
+    margin-bottom: 60rpx;
+}
+
+.player-dead {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+
+.leader-logo {
+    width: 36rpx;
+    height: 36rpx;
+    float: left;
+    margin-right: -20rpx;
 }

@@ -1,12 +1,12 @@
 <!--pages/join-room/join-room.wxml-->
-<import src="../../widget/search.wxml"/>
+<!--<import src="../../widget/search.wxml"/>-->
 <view class="page-container">
   <view class="widget-search">
-    <view wx:if="{{!editMode}}" class="widget-search-fake" bindtap="enterEdit">
+    <view class="widget-search-fake" bindtap="enterEdit" style="{{editMode?'display:none;':''}}">
       <image class="widget-search-icon" src="../../resources/search.png"></image>
       <text class="widget-search-hint">房间号</text>
     </view>
-    <form wx:else class="widget-search-form" bindsubmit="searchRoom">
+    <form class="widget-search-form" bindsubmit="searchRoom" style="{{!editMode?'display:none;':''}}">
       <input class="widget-search-input" name="keyword" type="text" placeholder="房间号" 
         bindblur="endEdit" auto-focus/>
       <button class="widget-search-submit" type="primary" form-type="submit">搜索</button>

@@ -1,5 +1,5 @@
 <template name="user-profile">
-  <view class="widget-user-profile {{extraClasses}}" id="{{id}}" bindtap="{{onTap}}">
+  <view class="widget-user-profile {{extraClasses}}" id="{{id}}" bindtap="onTapPlayer">
     <image class="widget-profile-avatar" src="{{avatarUrl}}"></image>
     <text class="widget-profile-name" style="color:{{textColor}}">{{name}}</text>
     <text class="widget-profile-desc" style="color:{{textColor}}">{{desc}}</text>

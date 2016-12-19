@@ -1,15 +1,23 @@
 <!--pages/god-view/god-view.wxml-->
-<import src="../../widget/user-profile.wxml"/>
+<!--<import src="../../widget/user-profile.wxml"/>-->
 <view class="page-container">
   <view class="players-panel">
     <text class="text-main">房间号{{roomNum}}，已有{{players.length}}人加入游戏：</text>
     <view class="players-container">
       <block wx:for="{{players}}" wx:key="num">
-        <template is="user-profile" data="{{id: item.id, avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, textColor: item.color || '', extraClasses: index%3==1?'profile-center':''}}"/>
+        <view class="widget-user-profile {{index%3==1?'profile-center':''}} {{item.status=='dead'?'player-dead':''}}" id="{{item.id}}" bindtap="onTapPlayer">
+          <view>
+          <image wx:if="{{item.isHead}}" class="leader-logo" src="../../resources/crown.png"></image>
+          <image class="widget-profile-avatar" src="{{item.avatarUrl}}"></image>
+          </view>
+          <text class="widget-profile-name" style="color:{{item.color}}">{{item.nickName}}</text>
+          <text class="widget-profile-desc" style="color:{{item.color}}">{{item.roleName}}</text>
+        </view>
+        <!--<template is="user-profile" data="{{id: item.id, onTap:'onTapPlayer', avatarUrl: item.avatarUrl, name: item.nickName, desc: item.roleName, textColor: item.color || '', extraClasses: index%3==1?'profile-center':''}}"/>-->
       </block>
     </view>
   </view>
-  <view class="btn-area">
+  <view class="btn-area float-bottom">
     <button type="primary" bindtap="restartGame">重开一局</button>
     <button type="default">上帝口令</button>
   </view>

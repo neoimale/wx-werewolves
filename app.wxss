@@ -41,7 +41,15 @@ page {
 .btn-area{
     padding: 0 30px;
 }
+
 .btn-area button{
     margin-top: 20rpx;
     margin-bottom: 20rpx;
+}
+
+.float-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
