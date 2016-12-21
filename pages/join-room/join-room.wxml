@@ -2,15 +2,16 @@
 <!--<import src="../../widget/search.wxml"/>-->
 <view class="page-container">
   <view class="widget-search">
-    <view class="widget-search-fake" bindtap="enterEdit" style="{{editMode?'display:none;':''}}">
+    <view wx:if="{{!editMode}}" class="widget-search-fake" bindtap="enterEdit">
       <image class="widget-search-icon" src="../../resources/search.png"></image>
       <text class="widget-search-hint">房间号</text>
     </view>
-    <form class="widget-search-form" bindsubmit="searchRoom" style="{{!editMode?'display:none;':''}}">
+    <form wx:else class="widget-search-form" bindsubmit="searchRoom">
       <input class="widget-search-input" name="keyword" type="text" placeholder="房间号" 
-        bindblur="endEdit" auto-focus/>
+        auto-focus/>
       <button class="widget-search-submit" type="primary" form-type="submit">搜索</button>
     </form>
   </view>
+  <view class="content-container" bindtap="endEdit"></view>
 <!--<template is="search" data="{{placeholder: '房间号', edit: 'editMode', searchIcon: '../../resources/search.png', doSearch: 'searchRoom', onFocus: 'enterEdit', onBlur: 'endEdit', onTap: 'enterEdit'}}" />-->
 </view>

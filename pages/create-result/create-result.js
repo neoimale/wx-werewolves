@@ -25,7 +25,7 @@ Page({
           success: function(rlt) {
               if(rlt.data.god) {
                 wx.navigateTo({
-                    url: '../god-view/god-view?room=' + roomNum + '&type=' + res.data.roomInfo.type,
+                    url: '../god-view/god-view?room=' + roomNum + '&type=' + rlt.data.roomInfo.type,
                 })
               }
           }

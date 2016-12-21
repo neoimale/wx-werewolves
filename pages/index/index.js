@@ -3,33 +3,30 @@ Page({
     data: {
 
     },
-    onLoad: (options) => {
-        // wx.connectSocket({
-        //   url: "wss://api.byutech.cn/ws/sessionid"
-        // })
-        // wx.onSocketOpen(function() {
-        //   wx.sendSocketMessage({
-        //     data: 'I got U'
-        //   })
-        // })
-    },
     tapCreate: (event) => {
+        // wx.scanCode({
+        //   success: function(rlt) {
+        //       if(rlt.result) {
+        //           wx.navigateTo({
+        //             url: rlt.result
+        //           })
+        //       }
+        //   }
+        // })
         wx.navigateTo({
-          url: '../create-room/create-room',
-          success: function(res){
-            // success
-          },
-          fail: function() {
-            // fail
-          },
-          complete: function() {
-            // complete
-          }
+          url: '../create-room/create-room'
         })
     },
     tapJoin: (event) => {
         wx.navigateTo({
           url: '../join-room/join-room'
         })
+    },
+    onShareAppMessage: () => {
+        return {
+            title: '天天狼人杀',
+            desc: '一起来微信狼人杀吧',
+            path: '/pages/index/index'
+        }
     }
 })
