@@ -1,4 +1,13 @@
 /* pages/create-result/create-result.wxss */
+page {
+    height: 100%;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .section {
     margin-top: 25px;
     display: flex;
@@ -32,11 +41,25 @@
     margin-top: 25px;
 }
 
-.btn-Gods {
+.section-footer {
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.text-god-view {
+    text-align: center;
+    font-size: 10pt;
+    color: #576B95;
+    margin-bottom: 25px;
+}
+
+/*.btn-Gods {
     opacity: 1.0;
 }
 
 .label-Gods {
-    /*display: flex;*/
+    display: flex;
     justify-content: center;
-}
+}*/

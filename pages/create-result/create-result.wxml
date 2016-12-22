@@ -20,11 +20,12 @@
         <button class="btn-share" type="primary" bindtap="clickShareAction">分享给小伙伴</button>
     </view>
 
-    <view class="btn-area">
-        <button class="btn-Gods" type="primary" bindtap="clickGodViewAction">我是上帝?</button>
+    <view class="section-footer">
+        <!--<button class="btn-Gods" type="primary" bindtap="clickGodViewAction">我是上帝?</button>-->
         <!--<label class="label-Gods">
             <button class="btn-Gods">我是上帝?</button>
             我是上帝?
         </label>-->
+        <text class="text-god-view" bindtap="clickGodViewAction">我是上帝?</text>
     </view>
 </view>
