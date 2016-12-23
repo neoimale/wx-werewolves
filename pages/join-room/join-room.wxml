@@ -14,5 +14,12 @@
       <button class="widget-search-submit" type="primary" form-type="submit" plain="{{true}}">搜索</button>
     </form>
   </view>
-  <view class="content-container" bindtap="endEdit"></view>
+  <view class="content-container" bindtap="endEdit">
+    <view class="title-container">
+      <text class="content-title">Online</text>
+    </view>
+    <view class="image-container">
+      <image class="content-image" mode="aspectFit" src="../../resources/coming_soon.png"></image>
+    </view>
+  </view>
 </view>
