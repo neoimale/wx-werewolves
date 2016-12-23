@@ -14,11 +14,6 @@ page {
     justify-content: center;
 }
 
-.text-room-title {
-    color: #cccccc;
-    font-size: 11pt; 
-}
-
 .text-room-value {
     color: #09BB07;
     font-size: 35pt;
@@ -27,14 +22,13 @@ page {
 .text-success-title {
     margin-top: 5px;
     color: #353535;
+    font-size: 14pt;
 }
 
 .text-friendly-reminder {
     margin-left: 15px;
     text-align: center;
     margin-right: 15px;
-    font-size: 10pt;
-    color: #999999;
 }
 
 .btn-area {
@@ -50,9 +44,9 @@ page {
 
 .text-god-view {
     text-align: center;
-    font-size: 10pt;
+    font-size: 11pt;
     color: #576B95;
-    margin-bottom: 25px;
+    margin-bottom: 50rpx;
 }
 
 .qrcode-panel {

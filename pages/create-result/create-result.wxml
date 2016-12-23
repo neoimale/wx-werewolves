@@ -1,7 +1,7 @@
 <!--pages/create-result/create-result.wxml-->
 <view class="page-container">
     <view class="section">
-        <text class="text-room-title">房间号</text>
+        <text class="text-desc">房间号</text>
     </view>
 
     <view class="section">
@@ -13,7 +13,7 @@
     </view>
 
     <view class="section">
-        <text class="text-friendly-reminder">现在可以输入房间号来加入游戏,准备好开始游戏吧~天黑请闭眼</text>
+        <text class="text-friendly-reminder text-desc">现在可以输入房间号来加入游戏,准备好开始游戏吧~天黑请闭眼</text>
     </view>
 
     <view class="btn-area">
