@@ -4,15 +4,6 @@ Page({
 
     },
     tapCreate: (event) => {
-        // wx.scanCode({
-        //   success: function(rlt) {
-        //       if(rlt.result) {
-        //           wx.navigateTo({
-        //             url: rlt.result
-        //           })
-        //       }
-        //   }
-        // })
         wx.navigateTo({
           url: '../create-room/create-room'
         })

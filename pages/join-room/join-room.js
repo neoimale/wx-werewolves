@@ -62,6 +62,17 @@ Page({
       editMode: 0
     })
   },
+  scanCode: function() {
+    wx.scanCode({
+      success: function(rlt) {
+        if(rlt.result) {
+          wx.navigateTo({
+            url: rlt.result
+          })
+        }
+      }
+    })
+  },
   onLoad:function(options){
     
   },

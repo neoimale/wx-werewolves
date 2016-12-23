@@ -12,3 +12,17 @@ page {
 .content-container {
     flex: 1;
 }
+
+#qr-search {
+    width: 50rpx;
+    height: 50rpx;
+    margin-left: 10rpx;
+    vertical-align: middle;
+}
+
+.widget-search-input input {
+    width: 475rpx;
+    height: 66rpx;
+    display: inline-block;
+    vertical-align: middle;
+}

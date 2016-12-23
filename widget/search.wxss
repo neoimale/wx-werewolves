@@ -9,7 +9,7 @@
 
 .widget-search-fake {
     width: 720rpx;
-    height: 70rpx;
+    height: 68rpx;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,12 +27,13 @@
 }
 
 .widget-search-input {
-    width: 550rpx;
+    width: 575rpx;
     height: 66rpx;
     display: inline-block;
     border: 1px solid #e6e6ea;
     border-radius: 5px;
     background-color: #fff;
+    vertical-align: middle;
 }
 
 .widget-search-submit {
@@ -40,6 +41,7 @@
     margin-left: 20rpx;
     font-size: 25rpx;
     padding: 0 1.34em;
+    vertical-align: middle;
 }
 
 .widget-search-icon {
