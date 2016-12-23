@@ -9,7 +9,7 @@
     <form wx:else class="widget-search-form" bindsubmit="searchRoom">
       <input class="widget-search-input" name="keyword" type="text" placeholder="房间号" 
         auto-focus/>
-      <button class="widget-search-submit" type="primary" form-type="submit">搜索</button>
+      <button class="widget-search-submit" type="primary" form-type="submit" plain="{{true}}">搜索</button>
     </form>
   </view>
   <view class="content-container" bindtap="endEdit"></view>

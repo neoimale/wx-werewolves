@@ -133,6 +133,7 @@ Page({
           type: 1,
           content: {
             event: 'head',
+            category: 'god',
             message: {
               room: this.data.roomNum,
               key: player.id
@@ -146,6 +147,7 @@ Page({
           type: 1,
           content: {
             event: 'reborn',
+            category: 'god',
             message: {
               room: this.data.roomNum,
               key: player.id
@@ -158,6 +160,7 @@ Page({
           type: 1,
           content: {
             event: 'death',
+            category: 'god',
             message: {
               room: this.data.roomNum,
               key: player.id

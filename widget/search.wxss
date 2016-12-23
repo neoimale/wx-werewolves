@@ -38,7 +38,7 @@
 .widget-search-submit {
     display: inline-block;
     margin-left: 20rpx;
-    font-size: 13px;
+    font-size: 25rpx;
     padding: 0 1.34em;
 }
 
