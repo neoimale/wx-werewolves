@@ -55,6 +55,29 @@ page {
     margin-bottom: 25px;
 }
 
+.qrcode-panel {
+    background-color: #fff;
+    padding: 40rpx;
+    width: 600rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.qrcode-canvas {
+    width: 500rpx;
+    height: 500rpx;
+    margin-top: 40rpx;
+}
+
+.qrcode-desc {
+    color: #888;
+    font-size: 13pt;
+    margin-top: 40rpx; 
+    padding: 0 20rpx;
+}
+
 /*.btn-Gods {
     opacity: 1.0;
 }
