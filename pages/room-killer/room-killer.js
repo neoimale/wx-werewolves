@@ -28,15 +28,17 @@ Page({
     var roomNum = options.number;
     var cacheKey = options.cache;
     var data = getApp().getCache(cacheKey);
-    console.log(data);
-    var roleColor = Util.roleColor(data.role);
-    data = this.processInfo(data);
-    data.roomInfo.unshift({key: '当前房号:', value: roomNum});
-    data.roleColor = roleColor;
-    this.setData(data);
     wx.setNavigationBarTitle({
       title: '狼人杀 - ' + roomNum
     })
+    console.log(data);
+    if(data) {
+      var roleColor = Util.roleColor(data.role);
+      data = this.processInfo(data);
+      data.roomInfo.unshift({key: '当前房号:', value: roomNum});
+      data.roleColor = roleColor;
+      this.setData(data);
+    }
   },
   processInfo: function(data) {
     var out = {};

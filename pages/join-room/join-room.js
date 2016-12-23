@@ -15,6 +15,9 @@ Page({
       });
       return;
     }
+    this.join(roomNum);
+  },
+  join: function(roomNum) {
     var test = /(\d+)(god)$/.exec(roomNum);
     var isGod = test ? test[2] : false;
     roomNum = test ? test[1] : roomNum;
@@ -64,11 +67,16 @@ Page({
   },
   scanCode: function() {
     wx.scanCode({
-      success: function(rlt) {
+      success: (rlt) => {
+        console.log('scan >>> ', rlt.result);
         if(rlt.result) {
-          wx.navigateTo({
-            url: rlt.result
-          })
+          if(rlt.result.indexOf('join-room/join-room') != -1) {
+            this.join('1000');
+          } else {
+            wx.navigateTo({
+              url: rlt.result
+            })
+          }
         }
       }
     })

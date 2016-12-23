@@ -13,7 +13,7 @@
     </view>
 
     <view class="section">
-        <text class="text-friendly-reminder">现在可以输入房间号来加入游戏,准备好开始游戏吧~天黑请闭眼,neo是个大色棍</text>
+        <text class="text-friendly-reminder">现在可以输入房间号来加入游戏,准备好开始游戏吧~天黑请闭眼</text>
     </view>
 
     <view class="btn-area">
@@ -28,4 +28,10 @@
         </label>-->
         <text class="text-god-view" bindtap="clickGodViewAction">我是上帝?</text>
     </view>
+</view>
+<view class="popup" style="{{showPopup ?'':'display: none'}}" bindtap="dismissPopup">
+  <view class="qrcode-panel">
+    <canvas canvas-id="qrCanvas" class="qrcode-canvas"/>
+    <text class="qrcode-desc text-center">用扫一扫扫描二维码或者截屏发送给好友</text>
+  </view>
 </view>
