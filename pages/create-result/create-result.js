@@ -4,7 +4,8 @@ var QR = require('../../utils/qrcode');
 
 Page({
   data:{
-    roomNumber: 1
+    roomNumber: 1,
+    showPopup: true
   },
 
   onLoad:function(options){
@@ -12,7 +13,7 @@ Page({
     this.setData({
       roomNumber: options.room     
     })
-    this.drawQRCode('../join-room/join-room?room=' + this.data.roomNumber);
+    this.drawQRCode('wolf://join-room/join-room?room=' + this.data.roomNumber);
   },
   clickShareAction: function() {
     this.showPopup();
@@ -22,6 +23,9 @@ Page({
   },
   clickGodViewAction: function(e) {
     this.goToGodView(this.data.roomNumber);  
+  },
+  clickQRCode: function(e) {
+
   },
   goToGodView: function(roomNum) {
       request({

@@ -35,15 +35,15 @@ page {
     align-items: center;
     height: 68rpx;
     width: 100%;
-    /*border-top: 1px solid #CACDD3;*/
-    border-bottom: 1px solid #CACDD3;
+    /*border-top: 1px solid #ccc;*/
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .content-title {
     margin-left: 20rpx;
-    font-family: "Microsoft Yahei";
-    color: #000;
+    color: #658e99;
     font-weight: 400;
+    font-size: 13pt;
 }
 
 .image-container {

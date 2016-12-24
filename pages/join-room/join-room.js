@@ -1,5 +1,6 @@
 // pages/join-room/join-room.js
 var request = require('../../utils/request').request;
+var URL = require('../../utils/url');
 
 Page({
   data: {
@@ -32,7 +33,6 @@ Page({
       method: 'POST',
       data: isGod ? {god: 1} : {},
       success: function(res) {
-        wx.hideToast();
         if(res.data.god) {
           wx.redirectTo({
             url: '../god-view/god-view?room=' + roomNum + '&type=' + res.data.roomInfo.type
@@ -44,6 +44,7 @@ Page({
             url: '../room-killer/room-killer?cache=' + cacheKey + '&number=' + roomNum
           })
         }
+        wx.hideToast();
       },
       error: function(data) {
         wx.hideToast();
@@ -70,13 +71,20 @@ Page({
       success: (rlt) => {
         console.log('scan >>> ', rlt.result);
         if(rlt.result) {
-          if(rlt.result.indexOf('join-room/join-room') != -1) {
-            this.join('1000');
-          } else {
-            wx.navigateTo({
-              url: rlt.result
-            })
-          }
+          try {
+            let url = new URL(rlt.result, null, true);
+            if(url.hostname == 'join-room') {   
+              this.join(url.query.room);
+            } else {
+              wx.showModal({
+                title: '加入房间失败',
+                content: '这不是一个有效的二维码',
+                showCancel: false
+              });
+            }
+          } catch (e) {
+            console.log(e);
+          } 
         }
       }
     })
