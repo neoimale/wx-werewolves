@@ -44,18 +44,27 @@ Page({
       this.config = this.calculateConfig({
           type: Const.GAME.GAME_WOLF,
           num: this.config.num,
-          config: {
-              wolf: werwolfList[e.detail.value]
-          }
+          config: _.extend(this.config.config, {
+              wolf: werwolfList[e.detail.value],
+              civilian: 0
+          })
       })
       var data = this.parseConfig(this.config);
       this.setData(data);
   },
 
   bindPickerChangeToVillager: function(e) {
-      this.setData({
-          villagerIndex: e.detail.value
+      var villagerList = this.data.villagerList;
+      this.config = this.calculateConfig({
+          type: Const.GAME.GAME_WOLF,
+          num: this.config.num,
+          config: _.extend(this.config.config, {
+              civilian: villagerList[e.detail.value],
+              wolf: 0
+          })
       })
+      var data = this.parseConfig(this.config);
+      this.setData(data);
   },
 
   checkboxChange: function(e) {
@@ -63,6 +72,8 @@ Page({
   },
 
   calculateConfig: function(conf) {
+    // 计算按照优先级: 总人数 > 特殊身份 > 狼人 > 平民
+    // 选择总人数时只需传总人数，其余要传整个config过来
     if(conf.type == Const.GAME.GAME_WOLF) {
         conf.config = conf.config || {};
         let {wolf=0, civilian=0, oracle=0, witch=0, hunter=0, cupid=0, guard=0, idiot=0} = conf.config;
@@ -94,7 +105,9 @@ Page({
     if(conf.type == Const.GAME.GAME_WOLF) {
         var werwolfIndex, villagerIndex;
         var werwolfList = [], villagerList = [];
-        for(var i=1;i<conf.num;i++) {
+        let {oracle=0, witch=0, hunter=0, cupid=0, guard=0, idiot=0} = conf.config;
+        let special = oracle + witch + hunter + cupid + guard + idiot;
+        for(var i=1;i<conf.num-special;i++) {
             werwolfList.push(i);
             villagerList.push(i);
             if(i == conf.config.wolf) {
