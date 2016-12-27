@@ -1,0 +1,53 @@
+.text-select {
+    color: #999999;
+    font-size: 11pt;
+    display: block;
+    margin-left: 15px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.picker {
+    background-color: white;
+    height: 37.5px;
+    display: flex
+}
+
+.picker-leftView {
+    margin-left: 15px;
+    margin-top: 9px;
+    flex: 2;
+    color: #333333;
+}
+
+.picker-main {
+    flex: 5;
+    color: #888888;
+    margin-top: 9px;
+}
+
+.line {
+    background-color: #eeeeee;
+    height: 1px;
+    margin-left: 15px;
+}
+
+.section-checkbox {
+    background-color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.roles-checkgroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.role-checkbox {
+    width: 200rpx;
+    margin-left: 30rpx;
+    padding-bottom: 8rpx;
+    padding-top: 8rpx;
+}

@@ -1,0 +1,30 @@
+<template name="wolf_user_kind_config">
+    <view class="section-text-picker">
+        <text class="text-select">请选择角色配置</text>
+        <picker bindchange="bindPickerChangeToWerwolf" value="{{werwolfIndex}}" range="{{werwolfList}}">
+            <view class="picker">
+                <text class="picker-leftView">狼人:</text>
+                <text class="picker-main">{{werwolfList[werwolfIndex]}}</text>
+            </view>
+        </picker>
+
+        <view class="line"></view>
+
+        <picker bindchange="bindPickerChangeToVillager" value="{{villagerIndex}}" range="{{villagerList}}">
+            <view class="picker">
+                <text class="picker-leftView">村民:</text>
+                <text class="picker-main">{{villagerList[villagerIndex]}}</text>
+            </view>
+        </picker>
+    </view>
+
+    <view class="line"></view>
+
+    <view class="section-checkbox">
+        <checkbox-group class="roles-checkgroup" bindchange="checkboxChange">
+            <label class="role-checkbox" wx:for="{{items}}">
+                <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+            </label>
+        </checkbox-group>
+    </view>
+</template>

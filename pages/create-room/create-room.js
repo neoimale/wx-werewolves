@@ -4,12 +4,17 @@ var _ = require('../../utils/lodash.core');
 
 Page({
   data: {
+    typeList: ['狼人杀','杀人游戏'],
     totalList: [6, 7, 8, 9,10,11,12,13, 14, 15, 16],
-    werwolfList: [1, 2, 3, 4, 5],
+    werwolfList: [1, 2, 3, 4, 5],killerList: [1,2,3,4,5],
     villagerList: [1, 2, 3, 4, 5],
+    policeList: [1,2,3,4,5],
+    typeIndex: 0,
     totalIndex: 0,
-    werwolfIndex: 1,
+    werwolfIndex: 1,killerIndex: 0,
     villagerIndex: 1,
+    policeIndex: 0,
+    gameType: Const.GAME.GAME_WOLF,
 
     items: [
       {name: 'oracle', value: '预言家', checked: 'true'},
@@ -21,6 +26,17 @@ Page({
     ]
   },
 
+    bindPickerChangeToGameType: function(e) {
+      let selectValue = e.detail.value;
+      this.setData({
+          typeIndex: selectValue,
+          gameType: (selectValue == 0) ? Const.GAME.GAME_WOLF :Const.GAME.GAME_KILLER,
+          totalList: (selectValue == 0) ? [6, 7, 8, 9,10,11,12,13, 14, 15, 16] : [7, 8, 9,10,11,12,13, 14, 15, 16,17,18,19],
+          villagerList: (selectValue == 0) ? [1, 2, 3, 4, 5] : [5,6,7,8,9,10,11],
+          villagerIndex: (selectValue == 0) ? 1 : 0,
+      })
+  },
+
   onLoad:function(options){
       this.config = this.calculateConfig({
           type: Const.GAME.GAME_WOLF,
@@ -29,6 +45,7 @@ Page({
       this.setData(this.parseConfig(this.config));
   },
 
+  // 选择总人数
   bindPickerChangeToTotal: function(e) {
       var totalList = this.data.totalList;
       this.config = this.calculateConfig({
@@ -39,6 +56,7 @@ Page({
       this.setData(data);
   },
 
+  // 选择狼人
   bindPickerChangeToWerwolf: function(e) {
       var werwolfList = this.data.werwolfList;
       this.config = this.calculateConfig({
@@ -53,6 +71,12 @@ Page({
       this.setData(data);
   },
 
+  // 选择杀手
+  bindPickerChangeToKiller: function(e) {
+
+  },
+
+  // 选择村民
   bindPickerChangeToVillager: function(e) {
       var villagerList = this.data.villagerList;
       this.config = this.calculateConfig({
@@ -65,6 +89,11 @@ Page({
       })
       var data = this.parseConfig(this.config);
       this.setData(data);
+  },
+
+  // 选择警察
+  bindPickerChangeToPolice: function(e) {
+
   },
 
   checkboxChange: function(e) {
