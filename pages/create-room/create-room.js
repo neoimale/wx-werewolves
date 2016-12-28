@@ -6,9 +6,9 @@ Page({
   data: {
     typeList: ['狼人杀','杀人游戏'],
     totalList: [6, 7, 8, 9,10,11,12,13, 14, 15, 16],
-    werwolfList: [1, 2, 3, 4, 5],killerList: [1,2,3,4,5],
+    werwolfList: [1, 2, 3, 4, 5],killerList: [2,3,4],
     villagerList: [1, 2, 3, 4, 5],
-    policeList: [1,2,3,4,5],
+    policeList: [2,3,4],
     typeIndex: 0,
     totalIndex: 0,
     werwolfIndex: 1,killerIndex: 0,
@@ -26,13 +26,14 @@ Page({
     ]
   },
 
-    bindPickerChangeToGameType: function(e) {
+  // 选择游戏类型
+  bindPickerChangeToGameType: function(e) {
       let selectValue = e.detail.value;
       this.setData({
+          totalIndex: 0,
           typeIndex: selectValue,
-          gameType: (selectValue == 0) ? Const.GAME.GAME_WOLF :Const.GAME.GAME_KILLER,
-          totalList: (selectValue == 0) ? [6, 7, 8, 9,10,11,12,13, 14, 15, 16] : [7, 8, 9,10,11,12,13, 14, 15, 16,17,18,19],
-          villagerList: (selectValue == 0) ? [1, 2, 3, 4, 5] : [5,6,7,8,9,10,11],
+          gameType: (selectValue == 0) ? Const.GAME.GAME_WOLF :Const.GAME.GAME_KILLER, 
+          villagerList: (selectValue == 0) ? [1, 2, 3, 4, 5] : [2,3,4,5,6,7,8],
           villagerIndex: (selectValue == 0) ? 1 : 0,
       })
   },
@@ -48,8 +49,9 @@ Page({
   // 选择总人数
   bindPickerChangeToTotal: function(e) {
       var totalList = this.data.totalList;
+      let gameType = this.data.gameType;
       this.config = this.calculateConfig({
-          type: Const.GAME.GAME_WOLF,
+          type: gameType,
           num: totalList[e.detail.value]
       })
       var data = this.parseConfig(this.config);
@@ -73,7 +75,13 @@ Page({
 
   // 选择杀手
   bindPickerChangeToKiller: function(e) {
-
+    //   var totalList = this.data.totalList;
+    //   this.config = this.calculateConfig({
+    //       type: gameType,
+    //       num: totalList[this.data.totolIndex]
+    //   })
+    //   var data = this.parseConfig(this.config);
+    //   this.setData(data);
   },
 
   // 选择村民
@@ -87,8 +95,10 @@ Page({
               wolf: 0
           })
       })
-      var data = this.parseConfig(this.config);
-      this.setData(data);
+      if (this.data.gameType == Const.GAME.GAME_WOLF) {
+        var data = this.parseConfig(this.config);
+        this.setData(data);
+      }
   },
 
   // 选择警察
@@ -125,6 +135,24 @@ Page({
             idiot: idiot
         })
         return conf;
+    } else {
+        var scale = 0;
+        var villagerList = this.data.villagerList;
+        var totalList = this.data.totalList;
+        if (conf.num > 5 && conf.num < 11) {
+            scale = 2;
+        } else if (conf.num > 10 && conf.num < 15) {
+            scale = 3;
+        } else {
+            scale = 4;
+        }
+        let villager = conf.num - scale*2;
+        return {
+            killerIndex: scale - 2,
+            policeIndex: scale - 2,
+            villagerIndex: villagerList.indexOf(villager) ,
+            totalIndex: totalList.indexOf(conf.num)
+        }
     }
   },
 
@@ -161,32 +189,45 @@ Page({
             villagerIndex: villagerIndex,
             items: items
         }
-    }      
+    } else {
+        return conf;
+    }   
   },
 
   clickCreateGameAction: function(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    var page = this;
+    var that = this;
+    var pageData = this.data;
+    var config = {};
+    if (pageData.gameType == Const.GAME.GAME_WOLF) {
+        config = { //房间配置
+                "wolf": pageData.werwolfList[pageData.werwolfIndex], //狼人数
+                "oracle": pageData.items[0].checked ? 1 : 0, //预言家
+                "witch": pageData.items[1].checked ? 1 : 0, //女巫
+                "civilian": pageData.villagerList[pageData.villagerIndex], //平民
+                "hunter": pageData.items[2].checked ? 1 : 0,//猎人
+                "cupid": pageData.items[3].checked ? 1 : 0, //丘比特
+                "guard": pageData.items[4].checked ? 1 : 0, //守卫
+                "idiot": pageData.items[5].checked ? 1 : 0  //白痴
+              }
+    } else {
+        config = {
+            "killer" : pageData.killerList[pageData.killerIndex],
+            "civilian" : pageData.villagerList[pageData.villagerIndex],
+            "police" : pageData.policeList[pageData.policeIndex],
+        }
+    }
     request({
           url: '/room/create',
           data: {
-              type: Const.GAME.GAME_WOLF,
-              num: 8,
-              config: { //房间配置
-                "wolf": 2, //狼人数
-                "oracle": 1, //预言家
-                "witch": 1, //女巫
-                "civilian": 3, //平民
-                "hunter": 0,//猎人
-                "cupid": 0, //丘比特
-                "guard": 0, //守卫
-                "idiot": 1  //白痴
-              }
+              type: pageData.gameType,
+              num: pageData.totalList[pageData.totalIndex],
+              config: config
           },
           method: 'POST',
           success: function(rlt) {
               var roomNum = rlt.data.id;
-              page.goResultView(roomNum);
+              that.goResultView(roomNum);
           }
     })
   },

@@ -21,7 +21,8 @@
     </view>
         
     <view class="section-text-picker">
-        <text class="text-select">请选择角色配置</text>
+        <text wx:if="{{gameType == 100}}" class="text-select">请选择角色配置</text>
+        <text wx:else class="text-select">角色配置如下</text>
         <picker wx:if="{{gameType == 100}}" bindchange="bindPickerChangeToWerwolf" value="{{werwolfIndex}}" range="{{werwolfList}}">
             <view class="picker">
                 <text class="picker-leftView">狼人:</text>
