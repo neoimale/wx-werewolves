@@ -90,7 +90,9 @@ Page({
     })
   },
   onLoad:function(options){
-    
+    if(options && options.room) {
+      this.join(options.room);
+    }
   },
   onReady:function(){
     // 页面渲染完成

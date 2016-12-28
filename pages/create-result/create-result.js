@@ -5,7 +5,7 @@ var QR = require('../../utils/qrcode');
 Page({
   data:{
     roomNumber: 1,
-    showPopup: true
+    showPopup: false
   },
 
   onLoad:function(options){
@@ -63,5 +63,12 @@ Page({
     this.setData({
       showPopup: false
     })
+  },
+  onShareAppMessage: function() {
+    return {
+        title: '房间号 - ' + this.data.roomNumber,
+        desc: '一起来微信狼人杀吧',
+        path: '/pages/join-room/join-room?room=' + this.data.roomNumber
+    }
   }
 })

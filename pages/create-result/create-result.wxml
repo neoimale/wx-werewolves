@@ -27,6 +27,6 @@
 <view class="popup" style="{{showPopup ?'':'display: none'}}" bindtap="dismissPopup">
   <view class="qrcode-panel" catchtap="clickQRCode">
     <canvas canvas-id="qrCanvas" class="qrcode-canvas" />
-    <text class="qrcode-desc text-center">用扫一扫扫描二维码或者截屏发送给好友</text>
+    <text class="qrcode-desc text-center">用扫一扫扫描二维码或者点击右上角分享给好友</text>
   </view>
 </view>
