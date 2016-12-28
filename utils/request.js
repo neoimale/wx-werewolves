@@ -76,6 +76,7 @@ function request(options, withSeesion = true) {
                   },
                   fail: function() {
                     _debugEnd('fail');
+                    options.error && options.error({code: -1, message: '当前网络出现异常'});
                     options.fail && options.fail();
                   }
                 })

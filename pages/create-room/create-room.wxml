@@ -1,7 +1,7 @@
 <view class="page-container">
 <form bindsubmit="clickCreateGameAction">
     <view class="section-text-picker">
-        <text class="text-select">请选择游戏类型</text>
+        <text class="text-select">选择类型</text>
         <picker bindchange="bindPickerChangeToGameType" value="{{typeIndex}}" range="{{typeList}}">
             <view class="picker">
                 <text class="picker-leftView">游戏类型:</text>
@@ -11,57 +11,62 @@
     </view>
 
     <view class="section-text-picker">
-        <text class="text-select">请选择游戏总人数</text>
+        <text class="text-select">选择人数</text>
         <picker bindchange="bindPickerChangeToTotal" value="{{totalIndex}}" range="{{totalList}}">
             <view class="picker">
-                <text class="picker-leftView">总人数:</text>
+                <text class="picker-leftView">游戏人数:</text>
                 <text class="picker-main">{{totalList[totalIndex]}}</text>
             </view>
         </picker>
     </view>
-        
-    <view class="section-text-picker">
-        <text wx:if="{{gameType == 100}}" class="text-select">请选择角色配置</text>
-        <text wx:else class="text-select">角色配置如下</text>
-        <picker wx:if="{{gameType == 100}}" bindchange="bindPickerChangeToWerwolf" value="{{werwolfIndex}}" range="{{werwolfList}}">
+   
+    <view wx:if="{{gameType == 100}}" class="section-text-picker">
+        <text class="text-select">角色配置</text>
+        <picker bindchange="bindPickerChangeToWerwolf" value="{{werwolfIndex}}" range="{{werwolfList}}">
             <view class="picker">
                 <text class="picker-leftView">狼人:</text>
                 <text class="picker-main">{{werwolfList[werwolfIndex]}}</text>
             </view>
         </picker>
-        <picker wx:else bindchange="bindPickerChangeToKiller" value="{{killerIndex}}" range="{{killerList}}">
-            <view class="picker">
-                <text class="picker-leftView">杀手:</text>
-                <text class="picker-main">{{killerList[killerIndex]}}</text>
-            </view>
-        </picker>
-
         <view class="line"></view>
-
         <picker bindchange="bindPickerChangeToVillager" value="{{villagerIndex}}" range="{{villagerList}}">
             <view class="picker">
                 <text class="picker-leftView">村民:</text>
                 <text class="picker-main">{{villagerList[villagerIndex]}}</text>
             </view>
         </picker>
-    </view>
+        <view class="line"></view>
+        <view class="section-checkbox">
+            <checkbox-group class="roles-checkgroup" bindchange="checkboxChange">
+                <label class="role-checkbox" wx:for="{{items}}">
+                    <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+                </label>
+            </checkbox-group>
+        </view>
+    </view> 
 
-    <view class="line"></view>
-    
-    <view wx:if="{{gameType == 101}}">
+    <view wx:elif="{{gameType == 101}}" class="section-text-picker">
+        <text class="text-select">角色配置</text>
+        <picker bindchange="bindPickerChangeToKiller" value="{{killerIndex}}" range="{{killerList}}">
+            <view class="picker">
+                <text class="picker-leftView">杀手:</text>
+                <text class="picker-main">{{killerList[killerIndex]}}</text>
+            </view>
+        </picker>
+        <view class="line"></view>
         <picker bindchange="bindPickerChangeToPolice" value="{{policeIndex}}" range="{{policeList}}">
             <view class="picker">
                 <text class="picker-leftView">警察:</text>
                 <text class="picker-main">{{policeList[policeIndex]}}</text>
             </view>
         </picker>
-    </view>
-    <view wx:else class="section-checkbox">
-        <checkbox-group class="roles-checkgroup" bindchange="checkboxChange">
-            <label class="role-checkbox" wx:for="{{items}}">
-                <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-            </label>
-        </checkbox-group>
+        <view class="line"></view>
+        <picker disabled="{{true}}" value="{{villagerIndex}}" range="{{villagerList}}">
+            <view class="picker">
+                <text class="picker-leftView">平民:</text>
+                <text class="picker-main">{{villagerList[villagerIndex]}}</text>
+            </view>
+        </picker>
     </view>
 
     <view class="btn-area">

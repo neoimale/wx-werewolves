@@ -1,35 +1,36 @@
 .text-select {
-    color: #999999;
-    font-size: 11pt;
+    color: #888;
+    font-size: 12pt;
     display: block;
-    margin-left: 15px;
-    margin-top: 20px;
-    margin-bottom: 8px;
+    margin-left: 30rpx;
+    margin-top: 36rpx;
+    margin-bottom: 16rpx;
 }
 
 .picker {
     background-color: white;
-    height: 37.5px;
-    display: flex
+    height: 80rpx;
+    display: flex;
+    align-items: center;
 }
 
 .picker-leftView {
-    margin-left: 15px;
-    margin-top: 9px;
-    flex: 2;
-    color: #333333;
+    margin-left: 30rpx;
+    flex: 3;
+    color: #888;
+    font-size: 14pt;
 }
 
 .picker-main {
     flex: 5;
-    color: #888888;
-    margin-top: 9px;
+    color: #353535;
+    font-size: 14pt;
 }
 
 .line {
     background-color: #eeeeee;
     height: 1px;
-    margin-left: 15px;
+    padding-left: 30px;
 }
 
 .section-checkbox {
@@ -37,6 +38,9 @@
     height: 60px;
     display: flex;
     align-items: center;
+    padding-top: 12rpx;
+    padding-bottom: 12rpx;
+    font-size: 14pt;
 }
 
 .roles-checkgroup {

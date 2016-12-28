@@ -6,14 +6,8 @@ Page({
   data: {
     typeList: ['狼人杀','杀人游戏'],
     totalList: [6, 7, 8, 9,10,11,12,13, 14, 15, 16],
-    werwolfList: [1, 2, 3, 4, 5],killerList: [2,3,4],
-    villagerList: [1, 2, 3, 4, 5],
-    policeList: [2,3,4],
     typeIndex: 0,
     totalIndex: 0,
-    werwolfIndex: 1,killerIndex: 0,
-    villagerIndex: 1,
-    policeIndex: 0,
     gameType: Const.GAME.GAME_WOLF,
 
     items: [
@@ -29,19 +23,24 @@ Page({
   // 选择游戏类型
   bindPickerChangeToGameType: function(e) {
       let selectValue = e.detail.value;
-      this.setData({
-          totalIndex: 0,
-          typeIndex: selectValue,
-          gameType: (selectValue == 0) ? Const.GAME.GAME_WOLF :Const.GAME.GAME_KILLER, 
-          villagerList: (selectValue == 0) ? [1, 2, 3, 4, 5] : [2,3,4,5,6,7,8],
-          villagerIndex: (selectValue == 0) ? 1 : 0,
-      })
+      let totalList = this.data.totalList;
+      let totalIndex = this.data.totalIndex;
+      this.config = this.calculateConfig({
+          type: (selectValue == 0) ? Const.GAME.GAME_WOLF :Const.GAME.GAME_KILLER,
+          num: totalList[totalIndex]
+      });
+      let data = _.extend({
+          typeIndex: selectValue
+      }, this.parseConfig(this.config));
+      this.setData(data);
   },
 
   onLoad:function(options){
+      let totalList = this.data.totalList;
+      let totalIndex = this.data.totalIndex;
       this.config = this.calculateConfig({
           type: Const.GAME.GAME_WOLF,
-          num: 6
+          num: totalList[totalIndex]
       })
       this.setData(this.parseConfig(this.config));
   },
@@ -54,7 +53,7 @@ Page({
           type: gameType,
           num: totalList[e.detail.value]
       })
-      var data = this.parseConfig(this.config);
+      var data = _.extend({totalIndex: e.detail.value},this.parseConfig(this.config));
       this.setData(data);
   },
 
@@ -64,7 +63,7 @@ Page({
       this.config = this.calculateConfig({
           type: Const.GAME.GAME_WOLF,
           num: this.config.num,
-          config: _.extend(this.config.config, {
+          config: _.extend({}, this.config.config, {
               wolf: werwolfList[e.detail.value],
               civilian: 0
           })
@@ -75,39 +74,82 @@ Page({
 
   // 选择杀手
   bindPickerChangeToKiller: function(e) {
-    //   var totalList = this.data.totalList;
-    //   this.config = this.calculateConfig({
-    //       type: gameType,
-    //       num: totalList[this.data.totolIndex]
-    //   })
-    //   var data = this.parseConfig(this.config);
-    //   this.setData(data);
+      var killerList = this.data.killerList;
+      var gameType = this.data.gameType;
+      this.config = this.calculateConfig({
+          type: gameType,
+          num: this.config.num,
+          config: {
+              killer: killerList[e.detail.value],
+              police: this.config.config.police
+          }
+      })
+      var data = this.parseConfig(this.config);
+      this.setData(data);
   },
 
   // 选择村民
   bindPickerChangeToVillager: function(e) {
       var villagerList = this.data.villagerList;
+      var gameType = this.data.gameType;
       this.config = this.calculateConfig({
-          type: Const.GAME.GAME_WOLF,
+          type: gameType,
           num: this.config.num,
-          config: _.extend(this.config.config, {
+          config: gameType == Const.GAME.GAME_WOLF ? _.extend({}, this.config.config, {
               civilian: villagerList[e.detail.value],
               wolf: 0
-          })
+          }) : {civilian: villagerList[e.detail.value]}
       })
-      if (this.data.gameType == Const.GAME.GAME_WOLF) {
-        var data = this.parseConfig(this.config);
-        this.setData(data);
-      }
+      var data = this.parseConfig(this.config);
+      this.setData(data);
   },
 
   // 选择警察
   bindPickerChangeToPolice: function(e) {
-
+      var policeList = this.data.policeList;
+      var gameType = this.data.gameType;
+      this.config = this.calculateConfig({
+          type: gameType,
+          num: this.config.num,
+          config: {
+              police: policeList[e.detail.value],
+              killer: this.config.config.killer
+          }
+      })
+      var data = this.parseConfig(this.config);
+      this.setData(data);
   },
 
   checkboxChange: function(e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+      if(e.detail.value.length > this.config.num - 2) {
+          wx.showModal({
+              title: '无效操作',
+              content: '当前游戏总人数为' + this.config.num + '人',
+              showCancel: false
+          });
+          this.setData(this.parseConfig(this.config));
+          return;
+      }
+      var conf = {};
+      _.each(e.detail.value, (key) => {
+          conf[key] = 1;
+      })
+      this.config = this.calculateConfig({
+          type: this.config.type,
+          num: this.config.num,
+          config: _.extend({}, {
+              wolf: this.config.config.wolf,
+              civilian: 0,
+              oracle: 0,
+              witch: 0,
+              hunter: 0,
+              cupid: 0,
+              guard:0,
+              idiot: 0
+          }, conf)
+      })
+      var data = this.parseConfig(this.config);
+      this.setData(data);
   },
 
   calculateConfig: function(conf) {
@@ -116,14 +158,17 @@ Page({
     if(conf.type == Const.GAME.GAME_WOLF) {
         conf.config = conf.config || {};
         let {wolf=0, civilian=0, oracle=0, witch=0, hunter=0, cupid=0, guard=0, idiot=0} = conf.config;
+        if(_.isEmpty(conf.config)) {
+            oracle = oracle || 1;
+            witch = witch || 1;
+            hunter = hunter || (conf.num > 8 ? 1 : 0);
+            guard = guard || (conf.num > 11 ? 1 : 0);
+        }
         let special = oracle + witch + hunter + cupid + guard + idiot;
-        special = special || Math.min(Math.floor(conf.num / 3), 4);
-        hunter = hunter || (conf.num > 8 ? 1 : 0);
-        guard = guard || (conf.num > 11 ? 1 : 0);
-        wolf = wolf || Math.min(Math.floor(conf.num / 3), conf.num - civilian - special);
+        let max = Math.max(conf.num - special - 1, 1);
+        wolf = wolf || (civilian ? conf.num - civilian - special : Math.floor(conf.num / 3));
+        wolf = Math.min(max, wolf);
         civilian = civilian || (conf.num - wolf - special);
-        oracle = oracle || 1;
-        witch = witch || 1;
         conf.config = _.extend(conf.config, {
             wolf: wolf,
             civilian: civilian,
@@ -135,24 +180,18 @@ Page({
             idiot: idiot
         })
         return conf;
-    } else {
-        var scale = 0;
-        var villagerList = this.data.villagerList;
-        var totalList = this.data.totalList;
-        if (conf.num > 5 && conf.num < 11) {
-            scale = 2;
-        } else if (conf.num > 10 && conf.num < 15) {
-            scale = 3;
-        } else {
-            scale = 4;
-        }
-        let villager = conf.num - scale*2;
-        return {
-            killerIndex: scale - 2,
-            policeIndex: scale - 2,
-            villagerIndex: villagerList.indexOf(villager) ,
-            totalIndex: totalList.indexOf(conf.num)
-        }
+    } else if(conf.type == Const.GAME.GAME_KILLER) {
+        conf.config = conf.config || {};
+        let special = Math.min(Math.floor(conf.num / 4), 4);
+        let killer = conf.config.killer || special;
+        let police = conf.config.police || special;
+        let civilian = conf.num - killer - police;
+        conf.config = _.extend(conf.config, {
+            killer: killer,
+            police: police,
+            civilian: civilian
+        });
+        return conf;
     }
   },
 
@@ -182,6 +221,7 @@ Page({
         items[4].checked = conf.config.guard > 0;
         items[5].checked = conf.config.idiot > 0;
         return {
+            gameType: conf.type,
             werwolfList: werwolfList,
             villagerList: villagerList,
             totalIndex: tatalIndex,
@@ -189,46 +229,61 @@ Page({
             villagerIndex: villagerIndex,
             items: items
         }
-    } else {
-        return conf;
+    } else if(conf.type == Const.GAME.GAME_KILLER) {
+        let killerList = [], policeList = [], villagerList = [];
+        let killerIndex, policeIndex, villagerIndex;
+        for(var i=1;i<conf.num-1;i++) {
+            if(i < Math.floor(conf.num/2)) {
+                killerList.push(i);
+                policeList.push(i);
+            }
+            villagerList.push(i);
+            if(i == conf.config.police) {
+                policeIndex = i - 1;
+            }
+            if(i == conf.config.killer) {
+                killerIndex = i - 1;
+            }
+            if(i == conf.config.civilian) {
+                villagerIndex = i - 1;
+            }
+        }
+        return {
+            gameType: conf.type,
+            killerList: killerList,
+            policeList: policeList,
+            villagerList: villagerList,
+            killerIndex: killerIndex,
+            policeIndex: policeIndex,
+            villagerIndex: villagerIndex
+        };
     }   
   },
 
   clickCreateGameAction: function(e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
     var that = this;
-    var pageData = this.data;
-    var config = {};
-    if (pageData.gameType == Const.GAME.GAME_WOLF) {
-        config = { //房间配置
-                "wolf": pageData.werwolfList[pageData.werwolfIndex], //狼人数
-                "oracle": pageData.items[0].checked ? 1 : 0, //预言家
-                "witch": pageData.items[1].checked ? 1 : 0, //女巫
-                "civilian": pageData.villagerList[pageData.villagerIndex], //平民
-                "hunter": pageData.items[2].checked ? 1 : 0,//猎人
-                "cupid": pageData.items[3].checked ? 1 : 0, //丘比特
-                "guard": pageData.items[4].checked ? 1 : 0, //守卫
-                "idiot": pageData.items[5].checked ? 1 : 0  //白痴
-              }
-    } else {
-        config = {
-            "killer" : pageData.killerList[pageData.killerIndex],
-            "civilian" : pageData.villagerList[pageData.villagerIndex],
-            "police" : pageData.policeList[pageData.policeIndex],
-        }
-    }
+    wx.showToast({
+      title: '正在创建房间',
+      icon: 'loading',
+      duration: 10000
+    })
     request({
-          url: '/room/create',
-          data: {
-              type: pageData.gameType,
-              num: pageData.totalList[pageData.totalIndex],
-              config: config
-          },
-          method: 'POST',
-          success: function(rlt) {
-              var roomNum = rlt.data.id;
-              that.goResultView(roomNum);
-          }
+        url: '/room/create',
+        data: this.config,
+        method: 'POST',
+        success: function(rlt) {
+            wx.hideToast();
+            var roomNum = rlt.data.id;
+            that.goResultView(roomNum);
+        },
+        error: function() {
+            wx.hideToast();
+            wx.showModal({
+              title: '创建游戏失败',
+              content: '网络出现异常',
+              showCancel: false
+            });
+        }
     })
   },
   goResultView: function(roomNumber) {
