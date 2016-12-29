@@ -52,7 +52,7 @@ page {
 .qrcode-panel {
     background-color: #fff;
     padding: 40rpx;
-    width: 600rpx;
+    width: 560rpx;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,6 +70,12 @@ page {
     font-size: 13pt;
     margin-top: 40rpx; 
     padding: 0 20rpx;
+}
+
+.panel-close {
+    width: 46rpx;
+    height: 46rpx;
+    padding: 10rpx;
 }
 
 /*.btn-Gods {

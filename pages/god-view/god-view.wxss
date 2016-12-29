@@ -1,9 +1,19 @@
 /* pages/god-view/god-view.wxss */
 @import "../../widget/user-profile.wxss";
+page {
+    height: 100%;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+}
 
 .players-panel {
     padding: 30rpx 60rpx;
     min-height: 300rpx;
+    flex: 1;
+    overflow-y: scroll;
 }
 
 .players-container {
@@ -19,7 +29,8 @@
 }
 
 .btn-area {
-    margin-bottom: 60rpx;
+    padding-bottom: 40rpx;
+    background-color: #efeff4;
 }
 
 .player-dead {

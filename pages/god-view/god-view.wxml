@@ -17,8 +17,8 @@
       </block>
     </view>
   </view>
-  <view class="btn-area float-bottom">
+  <view class="btn-area">
     <button type="primary" bindtap="restartGame">重开一局</button>
-    <button type="default">上帝口令</button>
+    <button type="default" bindtap="showGodOrder">上帝口令</button>
   </view>
 </view>

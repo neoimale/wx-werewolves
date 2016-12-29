@@ -13,8 +13,8 @@
       </view>
     </block>
   </view>
-  <view class="action-panel btn-area">
-    <button type="primary">需要我的帮助?</button>
+  <view class="action-panel btn-area float-bottom">
+    <button type="primary" hidden>需要我的帮助?</button>
     <button type="default" bindtap="go2RulePage">游戏规则</button>
   </view>
 </view>

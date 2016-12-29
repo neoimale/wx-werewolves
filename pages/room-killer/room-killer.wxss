@@ -38,4 +38,5 @@
 
 .action-panel {
     margin-top: 50rpx;
+    margin-bottom: 30rpx;
 }
