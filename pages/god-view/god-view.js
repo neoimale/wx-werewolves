@@ -77,6 +77,16 @@ Page({
           })
           break;
         }
+        case 'headcanceled': {
+          let players = this.data.players;
+          _.each(players, (item) => {
+            item.isHead = false;
+          })
+          this.setData({
+            players: players
+          })
+          break;
+        }
       }
     } catch(e) {
       console.error(e);
@@ -93,7 +103,9 @@ Page({
       nickName: info.nickName,
       avatarUrl: info.avatarUrl,
       role: player.role,
-      roleName: roleName
+      roleName: roleName,
+      isHead: player.head,
+      status: player.status
     }
   },
   onLoad: function(options){
@@ -127,12 +139,25 @@ Page({
       return item.id == e.currentTarget.id;
     })
     if(player) {
-      if(!player.head) {
+      if(!player.isHead) {
         actions.push('选为警长');
         messages.push({
           type: 1,
           content: {
             event: 'head',
+            category: 'god',
+            message: {
+              room: this.data.roomNum,
+              key: player.id
+            }
+          }
+        })
+      } else {
+        actions.push('取消警长');
+        messages.push({
+          type: 1,
+          content: {
+            event: 'cancelhead',
             category: 'god',
             message: {
               room: this.data.roomNum,
@@ -201,7 +226,7 @@ Page({
   },
   showGodOrder: function() {
     var content = '"天黑请闭眼"\n"丘比特请睁眼，丘比特请选择两位组成情侣" (第一晚)\n"守卫请睁眼，请选择你要守护的人"\n' + 
-      '"狼人请睁眼，请确认你的同伴。狼人请杀人，统一好意见"\n"女巫请睁眼，今天晚上他死了，你要用解药就他吗？毒药要用吗？"\n' +
+      '"狼人请睁眼，请确认你的同伴。狼人请杀人，统一好意见"\n"女巫请睁眼，今天晚上他死了，你要用解药救他吗？毒药要用吗？"\n' +
       '"预言家请睁眼，今天晚上你要验谁的身份？这个代表好人，这个代表坏人，他是这个。"\n"天亮了！"' ;
     wx.showModal({
       title: '上帝口令',
