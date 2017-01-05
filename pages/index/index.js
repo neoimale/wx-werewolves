@@ -16,7 +16,7 @@ Page({
     onShareAppMessage: () => {
         return {
             title: '天天狼人杀',
-            desc: '一起来微信狼人杀吧',
+            desc: '一起来玩狼人杀吧',
             path: '/pages/index/index'
         }
     }
