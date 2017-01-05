@@ -12,9 +12,9 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#efeff4",
-    "navigationBarTitleText": "狼人杀",
+    "navigationBarTitleText": "迷你桌游",
     "navigationBarTextStyle":"black",
     "backgroundColor": "#efeff4"
   },
-  "debug": true
+  "debug": false
 }

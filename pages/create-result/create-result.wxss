@@ -22,7 +22,7 @@ page {
 .text-success-title {
     margin-top: 5px;
     color: #353535;
-    font-size: 14pt;
+    font-size: 15pt;
 }
 
 .text-friendly-reminder {

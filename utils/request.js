@@ -1,7 +1,7 @@
 var Const = require('./const');
 var Promise = require('./es6-promise').Promise;
 
-var DEBUG = true;
+var DEBUG = false;
 var debugInfo;
 
 function _debugStart(url, data, method) {

@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "上帝视角",
     "navigationBarBackgroundColor": "#2c2d31",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "disableScroll": true
 }
